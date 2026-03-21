@@ -15,7 +15,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Josefin+Sans:wght@200;300;400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
 
     <style>
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -111,18 +111,18 @@
       }
 
       .welcome-label {
-        font-family: 'Josefin Sans', sans-serif;
-        font-weight: 200;
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
         font-size: 0.7rem;
         letter-spacing: 0.45em;
-        text-transform: uppercase;
+        text-transform: none;
         color: var(--muted);
         margin-bottom: 1.8rem;
       }
 
       .welcome-names {
         font-weight: 400;
-        font-style: italic;
+        font-style: normal;
         font-size: clamp(2.6rem, 8vw, 4.8rem);
         color: var(--soft-brown);
         line-height: 1.2;
@@ -164,8 +164,9 @@
         padding: 1rem 2.8rem;
         background: transparent;
         border: 1px solid var(--gold-light);
+        border-radius: 50px;
         color: var(--soft-brown);
-        font-family: 'Josefin Sans', sans-serif;
+        font-family: 'Lato', sans-serif;
         font-weight: 300;
         font-size: 0.72rem;
         letter-spacing: 0.35em;
@@ -321,7 +322,7 @@
       </div>
 
       <div class="welcome-content">
-        <div class="welcome-label">The Wedding of</div>
+        <div class="welcome-label">the wedding of</div>
         <div class="welcome-names">
           Yasinta
           <span class="welcome-ampersand">&amp;</span>
