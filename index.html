@@ -120,6 +120,20 @@
         margin-bottom: 1.8rem;
       }
 
+      .welcome-dear {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        color: var(--soft-brown);
+        margin-bottom: 2rem;
+        display: none;
+      }
+
+      .welcome-dear.visible {
+        display: block;
+      }
+
       .welcome-names {
         font-weight: 400;
         font-style: normal;
@@ -322,6 +336,7 @@
       </div>
 
       <div class="welcome-content">
+        <div class="welcome-dear" id="welcomeDear"></div>
         <div class="welcome-label">the wedding of</div>
         <div class="welcome-names">
           Yasinta
@@ -359,6 +374,15 @@
 
     <script>
       (function () {
+        // Personalized greeting from ?to= parameter
+        var params = new URLSearchParams(window.location.search);
+        var toName = params.get('to');
+        if (toName) {
+          var dearEl = document.getElementById('welcomeDear');
+          dearEl.textContent = 'Dear ' + toName;
+          dearEl.classList.add('visible');
+        }
+
         var audio = document.getElementById('bgMusic');
         var enterBtn = document.getElementById('enterBtn');
         var welcomeScreen = document.getElementById('welcomeScreen');
