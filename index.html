@@ -10,121 +10,345 @@
     <link rel="canonical" href="https://withjoy.com/zufar-and-yasinta/" />
     <meta property="og:title" content="Yasinta & Zufar" />
     <meta property="og:description" content="Undangan Pernikahan Yasinta & Zufar" />
-    <meta property="og:url" content="https://withjoy.com/zufar-and-yasinta/" />
+    <meta property="og:url" content="https://yasintadanzufar.com" />
     <meta property="og:type" content="website" />
 
-    <!-- Fastest redirect: JS (fires before meta refresh) -->
-    <script>
-      (function () {
-        var target = "https://withjoy.com/zufar-and-yasinta/";
-        // Preserve any query string from the incoming URL
-        if (window.location.search) {
-          target +=
-            (target.indexOf("?") === -1 ? "?" : "&") +
-            window.location.search.substring(1);
-        }
-        // Preserve hash
-        if (window.location.hash) {
-          target += window.location.hash;
-        }
-        window.location.replace(target);
-      })();
-    </script>
-
-    <!-- Fallback: meta refresh (works if JS is disabled) -->
-    <meta http-equiv="refresh" content="0; url=https://withjoy.com/zufar-and-yasinta/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet" />
 
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --cream: #faf8f4;
+        --warm-dark: #3d3229;
+        --gold: #b8976a;
+        --gold-light: #d4c4a8;
+        --soft-brown: #6b5c4c;
+        --muted: #b8a898;
+      }
 
       body {
-        min-height: 100vh;
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        background: var(--cream);
+        color: var(--warm-dark);
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      /* ====== WELCOME SCREEN ====== */
+      .welcome-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Cormorant Garamond', Georgia, serif;
-        background: #faf8f5;
-        color: #3d3229;
-        overflow: hidden;
+        background: var(--cream);
+        transition: opacity 0.8s ease, visibility 0.8s ease;
       }
 
-      .container {
+      .welcome-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .welcome-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse at 20% 50%, rgba(184, 151, 106, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(184, 151, 106, 0.06) 0%, transparent 40%),
+          radial-gradient(ellipse at 50% 80%, rgba(184, 151, 106, 0.04) 0%, transparent 60%);
+      }
+
+      .welcome-content {
+        position: relative;
         text-align: center;
-        animation: fadeIn 0.4s ease-out;
+        animation: welcomeFadeIn 1.2s ease-out;
       }
 
-      .names {
-        font-size: clamp(2rem, 6vw, 3.5rem);
-        font-weight: 300;
-        letter-spacing: 0.15em;
-        font-style: italic;
-        color: #6b5c4c;
-      }
-
-      .ampersand {
+      .ornament-top, .ornament-bottom {
         display: block;
-        font-size: clamp(1.2rem, 3vw, 1.8rem);
-        font-weight: 300;
-        color: #b8a898;
-        margin: 0.2em 0;
-        letter-spacing: 0.3em;
+        margin: 0 auto;
+        color: var(--gold-light);
+        font-size: 1.8rem;
+        letter-spacing: 0.6em;
+        opacity: 0.5;
       }
 
-      .loading {
-        margin-top: 2rem;
-        font-size: 0.85rem;
-        letter-spacing: 0.25em;
+      .ornament-top { margin-bottom: 2rem; }
+      .ornament-bottom { margin-top: 2rem; }
+
+      .welcome-label {
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 200;
+        font-size: 0.7rem;
+        letter-spacing: 0.45em;
         text-transform: uppercase;
-        color: #b8a898;
-        animation: pulse 1.5s ease-in-out infinite;
+        color: var(--muted);
+        margin-bottom: 1.5rem;
       }
 
-      .fallback {
-        margin-top: 1.5rem;
+      .welcome-names {
+        font-weight: 300;
+        font-style: italic;
+        font-size: clamp(2.4rem, 7vw, 4.2rem);
+        color: var(--soft-brown);
+        line-height: 1.3;
+        letter-spacing: 0.06em;
       }
 
-      .fallback a {
-        font-size: 0.9rem;
-        color: #8b7a6b;
-        text-decoration: none;
-        border-bottom: 1px solid #d4c8bc;
-        padding-bottom: 2px;
-        letter-spacing: 0.08em;
-        transition: color 0.3s, border-color 0.3s;
+      .welcome-ampersand {
+        display: block;
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        font-weight: 300;
+        color: var(--gold);
+        margin: 0.3em 0;
+        letter-spacing: 0.4em;
+        font-style: normal;
       }
 
-      .fallback a:hover {
-        color: #3d3229;
-        border-color: #3d3229;
+      .enter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 3rem;
+        padding: 1rem 2.8rem;
+        background: transparent;
+        border: 1px solid var(--gold-light);
+        color: var(--soft-brown);
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 300;
+        font-size: 0.75rem;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.4s ease;
       }
 
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(12px); }
+      .enter-btn:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--cream);
+      }
+
+      .enter-btn svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+        transition: transform 0.3s ease;
+      }
+
+      .enter-btn:hover svg {
+        transform: scale(1.15);
+      }
+
+      /* ====== MAIN WRAPPER ====== */
+      .main-wrapper {
+        position: fixed;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.6s ease 0.4s;
+      }
+
+      .main-wrapper.visible {
+        opacity: 1;
+      }
+
+      .joy-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* ====== MUSIC TOGGLE ====== */
+      .music-toggle {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 999;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--gold-light);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 16px rgba(61, 50, 41, 0.1);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .music-toggle.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .music-toggle:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 20px rgba(61, 50, 41, 0.15);
+      }
+
+      .music-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 2.5px;
+        height: 16px;
+      }
+
+      .music-bars span {
+        display: block;
+        width: 2.5px;
+        background: var(--gold);
+        border-radius: 1px;
+        transition: height 0.2s ease;
+      }
+
+      .music-bars.playing span:nth-child(1) { animation: bar1 0.6s ease-in-out infinite; }
+      .music-bars.playing span:nth-child(2) { animation: bar2 0.5s ease-in-out infinite 0.1s; }
+      .music-bars.playing span:nth-child(3) { animation: bar3 0.7s ease-in-out infinite 0.2s; }
+      .music-bars.playing span:nth-child(4) { animation: bar4 0.55s ease-in-out infinite 0.05s; }
+
+      .music-bars:not(.playing) span { height: 3px !important; }
+
+      @keyframes bar1 { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+      @keyframes bar2 { 0%, 100% { height: 6px; } 50% { height: 12px; } }
+      @keyframes bar3 { 0%, 100% { height: 3px; } 50% { height: 16px; } }
+      @keyframes bar4 { 0%, 100% { height: 5px; } 50% { height: 10px; } }
+
+      /* ====== ANIMATIONS ====== */
+      @keyframes welcomeFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
       }
 
-      @keyframes pulse {
-        0%, 100% { opacity: 0.4; }
-        50% { opacity: 1; }
+      /* ====== MOBILE ====== */
+      @media (max-width: 480px) {
+        .enter-btn {
+          padding: 0.9rem 2.2rem;
+          font-size: 0.7rem;
+        }
+        .music-toggle {
+          bottom: 1rem;
+          right: 1rem;
+          width: 40px;
+          height: 40px;
+        }
       }
     </style>
   </head>
   <body>
-    <noscript>
-      <meta http-equiv="refresh" content="0; url=https://withjoy.com/zufar-and-yasinta/" />
-    </noscript>
-    <div class="container">
-      <div class="names">
-        Yasinta
-        <span class="ampersand">&amp;</span>
-        Zufar
-      </div>
-      <div class="loading">Memuat&hellip;</div>
-      <div class="fallback">
-        <a href="https://withjoy.com/zufar-and-yasinta/">Klik di sini jika tidak dialihkan</a>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+      <!-- Replace with your MP3 file -->
+      <source src="music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+      <div class="welcome-bg"></div>
+      <div class="welcome-content">
+        <span class="ornament-top">&#10043; &#10043; &#10043;</span>
+        <div class="welcome-label">The Wedding of</div>
+        <div class="welcome-names">
+          Yasinta
+          <span class="welcome-ampersand">&amp;</span>
+          Zufar
+        </div>
+        <button class="enter-btn" id="enterBtn" aria-label="Masuk ke undangan">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="5,3 19,12 5,21" />
+          </svg>
+          Buka Undangan
+        </button>
+        <span class="ornament-bottom">&#10043; &#10043; &#10043;</span>
       </div>
     </div>
+
+    <!-- Main Content: WithJoy in iframe -->
+    <div class="main-wrapper" id="mainWrapper">
+      <iframe
+        class="joy-frame"
+        id="joyFrame"
+        title="Undangan Pernikahan Yasinta & Zufar"
+        loading="lazy"
+        allow="autoplay"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Music Toggle Button -->
+    <button class="music-toggle" id="musicToggle" aria-label="Toggle musik">
+      <div class="music-bars" id="musicBars">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </button>
+
+    <script>
+      (function () {
+        var audio = document.getElementById('bgMusic');
+        var enterBtn = document.getElementById('enterBtn');
+        var welcomeScreen = document.getElementById('welcomeScreen');
+        var mainWrapper = document.getElementById('mainWrapper');
+        var joyFrame = document.getElementById('joyFrame');
+        var musicToggle = document.getElementById('musicToggle');
+        var musicBars = document.getElementById('musicBars');
+        var isPlaying = false;
+
+        // Build the WithJoy URL preserving any path/query/hash from the current URL
+        function getTargetUrl() {
+          var base = 'https://withjoy.com/zufar-and-yasinta';
+          var path = window.location.pathname;
+          // If we're at root, just use base
+          if (path === '/' || path === '') {
+            return base + '/';
+          }
+          return base + path + window.location.search + window.location.hash;
+        }
+
+        enterBtn.addEventListener('click', function () {
+          // Start music
+          audio.volume = 0.4;
+          audio.play().then(function () {
+            isPlaying = true;
+            musicBars.classList.add('playing');
+          }).catch(function () {
+            // Audio play failed, still continue
+          });
+
+          // Load iframe
+          joyFrame.src = getTargetUrl();
+
+          // Transition screens
+          welcomeScreen.classList.add('hidden');
+          mainWrapper.classList.add('visible');
+          musicToggle.classList.add('visible');
+        });
+
+        // Music toggle
+        musicToggle.addEventListener('click', function () {
+          if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            musicBars.classList.remove('playing');
+          } else {
+            audio.play().then(function () {
+              isPlaying = true;
+              musicBars.classList.add('playing');
+            }).catch(function () {});
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
