@@ -172,8 +172,8 @@
       }
 
       .enter-btn:hover {
-        background: var(--gold);
-        border-color: var(--gold);
+        background: var(--soft-brown);
+        border-color: var(--soft-brown);
         color: var(--cream);
       }
 
@@ -329,12 +329,7 @@
           dearEl.classList.add('visible');
         }
 
-        // Update link href with ?to= param if present
         var enterBtn = document.getElementById('enterBtn');
-        if (toName) {
-          enterBtn.href = 'https://withjoy.com/zufar-and-yasinta/?to=' + encodeURIComponent(toName);
-        }
-
         var audio = document.getElementById('bgMusic');
         var musicToggle = document.getElementById('musicToggle');
         var musicBars = document.getElementById('musicBars');
