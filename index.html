@@ -279,9 +279,7 @@
   </head>
   <body>
 
-    <audio id="bgMusic" loop preload="auto">
-      <source src="music.mp3" type="audio/mpeg" />
-    </audio>
+    <audio id="bgMusic" preload="auto"></audio>
 
     <div class="welcome-screen">
       <div class="welcome-bg"></div>
@@ -335,14 +333,49 @@
         var musicBars = document.getElementById('musicBars');
         var isPlaying = false;
 
-        // Start music on click, then open new tab via default <a> behavior
-        enterBtn.addEventListener('click', function () {
+        // Playlist — add your MP3 files here
+        var playlist = [
+          'music1.mp3',
+          'music2.mp3',
+          'music3.mp3',
+          'music4.mp3'
+        ];
+        var currentTrack = 0;
+
+        function loadTrack(index) {
+          audio.src = playlist[index];
+          audio.load();
+        }
+
+        function playTrack() {
           audio.volume = 0.4;
           audio.play().then(function () {
             isPlaying = true;
             musicBars.classList.add('playing');
           }).catch(function () {});
+        }
 
+        function randomTrack() {
+          if (playlist.length <= 1) return 0;
+          var next;
+          do {
+            next = Math.floor(Math.random() * playlist.length);
+          } while (next === currentTrack);
+          return next;
+        }
+
+        // When a track ends, play a random next one
+        audio.addEventListener('ended', function () {
+          currentTrack = randomTrack();
+          loadTrack(currentTrack);
+          playTrack();
+        });
+
+        // Start music on click with random track
+        enterBtn.addEventListener('click', function () {
+          currentTrack = Math.floor(Math.random() * playlist.length);
+          loadTrack(currentTrack);
+          playTrack();
           musicToggle.classList.add('visible');
         });
 
