@@ -345,13 +345,9 @@
         ];
         var currentTrack = 0;
 
-        function loadTrack(index) {
+        function loadAndPlay(index) {
           audio.src = playlist[index];
-          audio.load();
-        }
-
-        function playTrack() {
-          audio.volume = 0.4;
+          audio.volume = 0.2;
           audio.play().then(function () {
             isPlaying = true;
             musicBars.classList.add('playing');
@@ -370,16 +366,22 @@
         // When a track ends, play a random next one
         audio.addEventListener('ended', function () {
           currentTrack = randomTrack();
-          loadTrack(currentTrack);
-          playTrack();
+          loadAndPlay(currentTrack);
         });
 
-        // Start music on click with random track
-        enterBtn.addEventListener('click', function () {
-          currentTrack = Math.floor(Math.random() * playlist.length);
-          loadTrack(currentTrack);
-          playTrack();
-          musicToggle.classList.add('visible');
+        // First click: start music. Second click: go to WithJoy.
+        var musicStarted = false;
+        enterBtn.addEventListener('click', function (e) {
+          if (!musicStarted) {
+            e.preventDefault();
+            currentTrack = Math.floor(Math.random() * playlist.length);
+            loadAndPlay(currentTrack);
+            musicToggle.classList.add('visible');
+            musicStarted = true;
+            // Change button text
+            enterBtn.innerHTML = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="5,3 19,12 5,21" /></svg> Go to Wedding Page';
+          }
+          // Second click: default <a> behavior opens WithJoy in new tab
         });
 
         // Music toggle
