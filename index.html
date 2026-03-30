@@ -115,7 +115,7 @@
         display: block;
       }
 
-      .welcome-label {
+      .welcome-invited {
         font-family: 'Lato', sans-serif;
         font-weight: 300;
         font-size: 0.7rem;
@@ -123,6 +123,11 @@
         text-transform: none;
         color: var(--muted);
         margin-bottom: 1.8rem;
+        display: none;
+      }
+
+      .welcome-invited.visible {
+        display: block;
       }
 
       .welcome-names {
@@ -293,7 +298,7 @@
 
       <div class="welcome-content">
         <div class="welcome-dear" id="welcomeDear"></div>
-        <div class="welcome-label">the wedding of</div>
+        <div class="welcome-invited" id="welcomeInvited">You are invited to the wedding of</div>
         <div class="welcome-names">
           Yasinta
           <span class="welcome-ampersand">&amp;</span>
@@ -323,8 +328,9 @@
         // Personalized greeting
         if (toName) {
           var dearEl = document.getElementById('welcomeDear');
-          dearEl.textContent = 'Dear ' + toName;
+          dearEl.textContent = 'Dear ' + toName + ',';
           dearEl.classList.add('visible');
+          document.getElementById('welcomeInvited').classList.add('visible');
         }
 
         var enterBtn = document.getElementById('enterBtn');
